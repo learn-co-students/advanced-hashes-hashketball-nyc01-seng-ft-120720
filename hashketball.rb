@@ -1,3 +1,5 @@
+require 'pry'
+
 # Write your code below game_hash
 def game_hash
   {
@@ -127,3 +129,68 @@ def game_hash
 end
 
 # Write code here
+def num_points_scored( name )
+  game_hash[:home][:players].each do |player|
+    return player[:points] if player[:player_name] == name
+  end
+  game_hash[:away][:players].each do |player|
+    return player[:points] if player[:player_name] == name
+  end
+end
+
+def shoe_size( name )
+  game_hash[:home][:players].each do |player|
+    return player[:shoe] if player[:player_name] == name
+  end
+  game_hash[:away][:players].each do |player|
+    return player[:shoe] if player[:player_name] == name
+  end
+end
+
+def team_colors( team )
+    return game_hash[:home][:colors] if game_hash[:home][:team_name] == team
+    return game_hash[:away][:colors] if game_hash[:away][:team_name] == team
+end
+
+def team_names
+  [ game_hash[:home][:team_name], game_hash[:away][:team_name] ]
+end
+
+def player_numbers( team )
+  result = []
+  if game_hash[:home][:team_name] == team
+    game_hash[:home][:players].each do |player|
+      result << player[:number]
+    end
+  end
+  if game_hash[:away][:team_name] == team
+    game_hash[:away][:players].each do |player|
+      result << player[:number]
+    end
+  end
+  result
+end
+
+def player_stats( name )
+  game_hash[:home][:players].each do |player|
+    return player if player[:player_name] == name
+  end
+  game_hash[:away][:players].each do |player|
+    return player if player[:player_name] == name
+  end
+end
+
+def big_shoe_rebounds
+  biggestShoe = ""
+  biggestShoeSize = 0
+  biggestShoeSizeRebounds = 0
+  allPlayers = game_hash[:home][:players].concat( game_hash[:away][:players] )
+  allPlayers.each do |player|
+    if player[:shoe] > biggestShoeSize
+      biggestShoe = player[:player_name]
+      biggestShoeSize = player[:shoe]
+      biggestShoeSizeRebounds = player[:rebounds]
+    end
+  end
+  biggestShoeSizeRebounds
+end
