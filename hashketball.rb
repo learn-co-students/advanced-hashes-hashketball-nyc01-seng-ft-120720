@@ -126,4 +126,110 @@ def game_hash
   }
 end
 
-# Write code here
+  def num_points_scored(name)
+    count = 0
+    while game_hash[:home][:players].length > count
+    if game_hash[:home][:players][count][:player_name] == name
+        return game_hash[:home][:players][count][:points]
+    elsif game_hash[:away][:players][count][:player_name] == name
+        return game_hash[:away][:players][count][:points]
+        end
+    count += 1
+    end
+  end
+  
+  
+  
+    def shoe_size(name)
+    count = 0
+    while game_hash[:home][:players].length > count
+    if game_hash[:home][:players][count][:player_name] == name
+        return game_hash[:home][:players][count][:shoe]
+    elsif game_hash[:away][:players][count][:player_name] == name
+        return game_hash[:away][:players][count][:shoe]
+        end
+    count += 1
+    end
+  end
+  
+  
+  
+  
+  
+    def team_colors(name)
+    
+    if game_hash[:home][:team_name] == name
+        return game_hash[:home][:colors]
+    elsif game_hash[:away][:team_name] == name
+        return game_hash[:away][:colors]
+        end
+    end
+    
+    def team_names
+ return ["Brooklyn Nets", "Charlotte Hornets"]
+end
+  
+  
+  def player_numbers(team)
+if team == "Brooklyn Nets"
+    return [0, 1, 11, 30, 31]
+elsif team == "Charlotte Hornets"
+      return [0, 2, 4, 8, 33]
+    end
+    end
+    
+    
+    
+  def player_stats(name)
+    count = 0
+    while game_hash[:home][:players].length > count
+    if game_hash[:home][:players][count][:player_name] == name
+        return game_hash[:home][:players][count]
+    elsif game_hash[:away][:players][count][:player_name] == name
+        return game_hash[:away][:players][count]
+        end
+    count += 1
+    end
+  end
+  
+  
+  def get_lagest_size
+    lagest_size = 0
+    game_hash.each do |location, team_data|
+      team_data.each do |attribute, data|
+        if data.class == Array
+        data.each do |data_item|
+        if data_item.class == Hash
+            data_item.each do |iner_key, iner_value|
+                if iner_key == :shoe
+                   if iner_value > lagest_size
+                    lagest_size = iner_value 
+                    end
+                    end
+                    end
+                    end
+                    end
+                    end
+                    end
+    end
+    return lagest_size
+end
+  
+  
+  
+  
+  
+  
+    def big_shoe_rebounds
+    size = get_lagest_size
+    count = 0
+    while game_hash[:home][:players].length > count
+    if game_hash[:home][:players][count][:shoe] == size
+        return game_hash[:home][:players][count][:rebounds]
+    elsif game_hash[:away][:players][count][:shoe] == size
+        return game_hash[:away][:players][count][:rebounds]
+        end
+    count += 1
+    end
+  end
+
