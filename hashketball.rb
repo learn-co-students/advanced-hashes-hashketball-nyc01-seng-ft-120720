@@ -268,3 +268,21 @@ def winning_team
   team_array[team_points.index((team_points.max))] + " is the winner!"
 end
 
+def player_with_longest_name
+  stat_by_player = collect_stat_by_name(:player_name)
+  name_length_values = stat_by_player.each_with_object ({}) { |(k,v),hash| hash[k] = v.length}
+  longest_name = find_max_stat_by_player(name_length_values)
+  longest_name
+end
+
+def long_name_steals_a_ton?
+  stat_by_player = collect_stat_by_name(:steals)
+  player_with_max_stat = find_max_stat_by_player(stat_by_player)
+  long_name = player_with_longest_name
+  if player_with_max_stat == player_with_longest_name
+    result = true 
+  else
+    result = false
+  end
+  result
+end 
