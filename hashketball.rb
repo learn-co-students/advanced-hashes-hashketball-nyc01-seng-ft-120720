@@ -241,4 +241,30 @@ def search_player_data (player_name, desired_player_data)
   end
 end
   
+#
+# Below are bonus methods
+#
+
+def most_points_scored
+  stat_by_player = collect_stat_by_name(:points)
+  player_with_max_stat = find_max_stat_by_player(stat_by_player)
+  player_with_max_stat
+end
+
+def winning_team
+  team_array = team_names
+  team_points = [0,0]
+  
+  i = 0
+  while i < team_array.length do
+    player_data = search_team_data(team_array[i],:players)
+    
+    player_data.each do |single_player|
+      points = single_player[:points]
+      team_points[i] += points
+    end
+    i += 1
+  end
+  team_array[team_points.index((team_points.max))] + " is the winner!"
+end
 
