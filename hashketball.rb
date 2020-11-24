@@ -126,4 +126,98 @@ def game_hash
   }
 end
 
-# Write code here
+
+
+def num_points_scored(player_name)
+  game_hash.each do |opponents, team_stats|
+    team_stats[:players].each do |player|
+      if player[:player_name] == player_name
+        return player[:points]
+      end
+    end
+  end
+end
+
+
+def shoe_size(player_name)
+  game_hash.each do |opponents, team_stats|
+    team_stats[:players].each do |player|
+      if player[:player_name] == player_name
+        return player[:shoe]
+      end 
+    end
+  end
+end
+
+
+def team_colors(team_name)
+  team_colors = []
+  game_hash.each do |opponents, team_stats|
+      if team_stats[:team_name] == team_name
+      team_stats[:colors].map do |colors|
+      team_colors << colors
+      end
+    end
+  end
+ return team_colors
+end
+
+
+def team_names
+  team_names = []
+    game_hash.each do |opponents, team_stats|
+      team_names << team_stats[:team_name]
+    end
+  return team_names
+end
+
+
+def player_numbers(team_name)
+  jersey_numbers = []
+  game_hash.each do |opponents, team_stats|
+    if team_stats[:team_name] == team_name
+      team_stats[:players].each do |player|
+      jersey_numbers << player[:number]
+      end
+    end
+  end
+ return jersey_numbers
+end
+
+
+def player_stats(player_name)
+  player_data = {}
+  game_hash.each do |opponents, team_stats|
+    team_stats[:players].each do |player|
+      if player[:player_name] == player_name
+        player.each do |key, value|
+        player_data[key] = value
+        end
+      end
+    end
+  end
+ return player_data
+end
+
+
+def big_shoe_rebounds
+  big_shoe = 0
+  big_player = ""
+  game_hash.each do |opponents, team_stats|
+    team_stats[:players].each do |player|
+      if player[:shoe] > big_shoe
+       big_shoe = player[:shoe]
+       big_player = player[:player_name]
+      end
+    end
+  end
+  number_of_rebounds = ""
+  game_hash.each do |opponents, team_stats|
+    team_stats[:players].each do |player|
+      if player[:player_name] == big_player
+      number_of_rebounds = player[:rebounds]
+      end
+    end
+  end
+ return number_of_rebounds
+end
