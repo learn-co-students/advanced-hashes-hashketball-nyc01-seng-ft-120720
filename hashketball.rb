@@ -1,3 +1,4 @@
+require 'pry'
 # Write your code below game_hash
 def game_hash
   {
@@ -127,3 +128,93 @@ def game_hash
 end
 
 # Write code here
+def num_points_scored (name)
+ game_hash.each do |k, v|
+   v.each do |k1, v1|
+      v[:players].each do |i|
+        if i[:player_name] == name
+         return i[:points]
+        end
+     end
+   end
+  end
+end
+
+def shoe_size (name)
+ game_hash.each do |k, v|
+   v.each do |k1, v1|
+      v[:players].each do |i|
+        if i[:player_name] == name
+         return i[:shoe]
+        end
+     end
+   end
+  end
+end
+
+def team_colors (name)
+ game_hash.each do |k, v|
+   v.each do |k1, v1|
+     if v[:team_name] == name
+        
+         return v[:colors]
+     end
+   end
+  end
+end
+
+def player_numbers (name)
+  jersey_nums = []
+ game_hash.each do |k, v|
+   v.each do |k1, v1|
+     if v[:team_name] == name
+        v[:players].each do |i|
+          jersey_nums << i[:number]
+        end
+
+     end
+   end
+  end
+  jersey_nums = jersey_nums.uniq 
+  jersey_nums
+end
+
+def player_stats (name)
+ game_hash.each do |k, v|
+   v.each do |k1, v1|
+      v[:players].each do |i|
+        if i[:player_name] == name
+         return i
+        end
+     end
+   end
+  end
+end
+
+def team_names
+  team_names = []
+ game_hash.each do |k, v|
+   v.each do |k1, v1|
+      team_names << v[:team_name]
+   end
+  end
+  team_names = team_names.uniq
+  team_names
+end
+
+def big_shoe_rebounds 
+  biggest = 0 
+  rebound = 0
+ game_hash.each do |k, v|
+   v.each do |k1, v1|
+      v[:players].each do |i|
+        if i[:shoe] > biggest
+          biggest = i[:shoe]  
+          rebound = i[:rebounds]
+        end
+       
+       end
+     end
+  end
+  rebound
+end
