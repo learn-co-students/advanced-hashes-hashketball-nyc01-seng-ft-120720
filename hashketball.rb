@@ -245,26 +245,37 @@ end
 
 
 def  big_shoe_rebounds ()
-  biggest = nil
-  rebound = 0 
   
-    game_hash.each do | key, value|
-      value[:players].each do |key2|
-          if biggest == nil
-            biggest = key2[:shoe]
+  
+  
+  biggest_shoe = 0
+  rebounds_scored = 0
+  game_hash.each do |home_away, keys_list|
+    keys_list[:players].each do |player|
+      if player[:shoe] > biggest_shoe
+        biggest_shoe = player[:shoe]
+        rebounds_scored = player[:rebounds]
+      end
+    end
+  end
+  return rebounds_scored
+end
 
-              if key2[:shoe] >= biggest
+    # game_hash.each do | key, value|
+    #   value[:players].each do |key2|
+    #       if biggest == nil
+    #         biggest = key2[:shoe]
 
-                 biggest = key2[:shoe]
+    #           if key2[:shoe] >= biggest
 
-                   rebound = key2[:rebounds]
-                   binding.pry
-              end 
-          end 
-      end 
-    end 
-  rebound 
-end 
+    #             biggest = key2[:shoe]
+
+    #           end 
+    #       end 
+    #                         rebound = key2[:rebounds]
+
+      
+ 
 
 
 
