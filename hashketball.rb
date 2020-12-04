@@ -1,4 +1,3 @@
-# Write your code below game_hash
 def game_hash
   {
     home: {
@@ -126,4 +125,108 @@ def game_hash
   }
 end
 
-# Write code here
+# HELPERS
+
+# def all_players_helper
+# game_hash[:home][:players].merge(game_hash[:away][:players])
+# end
+
+
+
+def num_points_scored(player_name)
+  #binding.pry
+  game_hash.each do |home_away, keys_list|
+    keys_list[:players].each do |player|
+      return player[:points] if player[:player_name] == player_name
+    end
+  end
+end
+
+def shoe_size(player_name)
+  #binding.pry
+  game_hash.each do |home_away, keys_list|
+    keys_list[:players].each do |player|
+      return player[:shoe] if player[:player_name] == player_name
+    end
+  end
+end
+
+def team_colors(team_name)
+  game_hash.each do |home_away, keys_list|
+    if keys_list[:team_name] == team_name
+      return keys_list[:colors].map
+    end
+  end
+end
+
+def team_names
+  #operates on the game hash and returns an Array of team team_names
+  game_hash.map do |home_away, keys_list|
+    keys_list[:team_name]
+  end
+end
+
+def player_numbers(team_name)
+  #takes an argument of the team name and returns Array of jersey numbers
+  game_hash.each do |home_away, keys_list|
+    if keys_list[:team_name] == team_name
+      return keys_list[:players].map do |player_name|
+        player_name[:number]
+      end
+    end
+  end
+end
+
+def player_stats(player_name)
+  game_hash.each do |home_away, keys_list|
+    keys_list[:players].each do |player|
+      if player[:player_name] == player_name
+        return player
+      end
+    end
+  end
+end
+
+def big_shoe_rebounds
+  #uses game hash to return the number of rebounds associated with biggest shoe_size
+  #first, find the player w/ the largest shoe size
+  #return that players number of rebounds
+  #remember to think about return values here
+  biggest_shoe = 0
+  rebounds_scored = 0
+  game_hash.each do |home_away, keys_list|
+    keys_list[:players].each do |player|
+      if player[:shoe] > biggest_shoe
+        biggest_shoe = player[:shoe]
+        rebounds_scored = player[:rebounds]
+      end
+    end
+  end
+  return rebounds_scored
+end
+
+# ~*~*~*~*BONUS CHALLENGES*~*~*~*~
+
+def most_points_scored
+  #which player has most points scored
+  most_points_scored = 0
+  most_points_players = []
+  game_hash.each do |home_away, keys_list|
+    keys_list[:players].each do |player|
+      if player[:points] > most_points_scored
+        most_points_scored = player[:points]
+        most_points_scored.replace(player[:player_name]) 
+end
+
+def winning_team
+  #which team has the most points
+end
+
+def player_with_longest_name
+  #which player has the longest name?
+end
+
+def long_name_steals_a_ton
+  #returns True if the player w/ longest name has most steals
+end
+
