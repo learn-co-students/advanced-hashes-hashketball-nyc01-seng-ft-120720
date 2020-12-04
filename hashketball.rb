@@ -177,38 +177,13 @@ def team_colors (team)
 end 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def team_names (team)
-
+def team_names 
+arr = []
   game_hash.each do | key, value|
-      binding.pry 
-
+arr << value[:team_name] 
   end
+  return arr
+
 end 
 
 
