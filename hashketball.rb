@@ -1,4 +1,5 @@
 # Write your code below game_hash
+require 'pry'
 def game_hash
   {
     home: {
@@ -125,5 +126,94 @@ def game_hash
     }
   }
 end
-
+def player_helper
+   game_hash[:home][:players].concat(game_hash[:away][:players])
+   
+end
 # Write code here
+# binding.pry
+def num_points_scored(player)
+  result = " "
+  game_hash.each do |key, value|
+    players_stat = value[:players]
+      players_stat.each do |info|
+        if info[:player_name] == player
+          result = info[:points]
+        end
+      end
+  end
+  result
+end
+
+def shoe_size(p_name)
+    result = " "
+  game_hash.each do |key, value|
+    players_stat = value[:players]
+      players_stat.each do |info|
+        if info[:player_name] == p_name
+          result = info[:shoe]
+        end
+      end
+  end
+  result
+end
+
+def team_colors(t_name)
+  result = " "
+  game_hash.each do |key, value|
+    if t_name == value[:team_name]
+      result = value[:colors]
+    end
+  end
+  result
+end
+
+def team_names 
+  result = [(game_hash[:home][:team_name]), (game_hash[:away][:team_name])]
+end
+
+def player_numbers (t_name)
+    result = []
+  game_hash.each do |key, value|
+    p_stat = value[:players]
+    p_stat.each do |stat|
+     if t_name == value[:team_name]
+       result << stat[:number]
+     end
+    end
+  end
+  result
+end
+
+def player_stats (name)
+  result = nil
+    game_hash.each do |key, value|
+      player_name = value[:players]
+      player_name.each do |p_name|
+        if name == p_name[:player_name]
+          result = p_name
+        end
+      end
+    end
+  result
+end
+
+def big_shoe_rebounds 
+  result = nil
+  big_shoe = 0
+    game_hash.each do |key, value|
+      player_name = value[:players]
+      player_name.each do |p_name|
+        if big_shoe < p_name[:shoe]
+          big_shoe = p_name[:shoe]
+          result = p_name[:rebounds]
+        end
+      end
+    end
+  result
+end
+
+
+
+
+#end of code
