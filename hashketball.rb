@@ -1,4 +1,5 @@
 # Write your code below game_hash
+require 'pry'
 def game_hash
   {
     home: {
@@ -126,4 +127,82 @@ def game_hash
   }
 end
 
-# Write code here
+#Write code here
+def num_points_scored(name)
+  game_hash.each do |key, stats|
+    stats[:players].each do |player|
+      if player[:player_name] == name 
+        return player[:points]
+      end
+    end 
+  end
+ end
+ 
+ def shoe_size(name)
+  game_hash.each do |key, stats|
+    stats[:players].each do |player|
+      if player[:player_name] == name 
+        return player[:shoe]
+      end
+    end 
+  end
+ end
+
+ def team_colors(team)
+  game_hash.each do |key, stats|
+      if stats[:team_name] == team 
+        return stats[:colors]
+      end
+    end 
+  end
+  
+  def team_names
+    teams = []
+  game_hash.each do |key, stats|
+    teams.push(stats[:team_name])
+    end 
+    teams
+  end
+  
+  def player_numbers(team)
+    team_arr = []
+  game_hash.each do |key, stats|
+    if stats[:team_name] == team
+        stats[:players].each do |player|
+          team_arr.push(player[:number])
+          team_arr.sort
+        end
+        return team_arr
+    end 
+  end
+end 
+
+   def player_stats(name)
+  game_hash.each do |key, stats|
+    stats[:players].each do |player|
+      if player[:player_name] == name 
+        return player
+      end
+    end 
+  end
+ end
+  
+def big_shoe_rebounds
+  curr_reb = nil 
+  max = nil 
+  game_hash.each do |key, stats|
+    stats[:players].each do |player|
+      if max == nil 
+        max = player[:shoe]
+        curr_reb = player[:rebounds]
+        elsif player[:shoe] > max
+        max = player[:shoe]
+        curr_reb = player[:rebounds]
+      end
+    end
+    return curr_reb
+  end
+ end
+  
+  
+  
