@@ -1,3 +1,4 @@
+require 'pry'
 
 def game_hash
   {
@@ -126,66 +127,75 @@ def game_hash
   }
 end
 
-require 'pry'
-
-def num_points_scored(player_search)
-  game_hash.each do |team, team_info|
-    team_info[:players].each do |player|
-      if player[:player_name] == player_search
-        return player[:points]
+def num_points_scored(player_name)
+  game_hash.each do |place,team|
+    team.each do |attribute, data|
+      if attribute == :players
+        data.each do |player|
+          if player[:player_name] == player_name
+            return player[:points]
+          end
+        end
       end
     end
   end
 end
 
-def shoe_size(name)
-  game_hash.each do |team, team_info|
-    team_info[:players].each do |player|
-      if player[:player_name] == name
-        return player[:shoe]
+def shoe_size(player_name)
+  game_hash.each do |place,team|
+    team.each do |attribute, data|
+      if attribute == :players
+        data.each do |player|
+          if player[:player_name] == player_name
+            return player[:shoe]
+          end 
+        end 
       end
     end
   end
 end
 
 def team_colors(team_input)
-  if team_input.downcase == "charlotte hornets" 
-    return game_hash[:away][:colors]
-  else return game_hash[:home][:colors]
+  game_hash.each do |place,team|
+    if team[:team_name] == team_input
+    return team[:colors]
   end
 end
-
+end
+  
 def team_names
-  game_hash.map do |team, team_info|
-    team_info[:team_name]
+  team_names_only = []
+  game_hash.each do |place,team|
+    team_names_only.push team[:team_name]
   end
+  team_names_only
 end
 
-def player_numbers(input)
-  output = []
-  game_hash.each do |team, team_info|
-    if team_info[:team_name] == input 
-      team_info.each do |key, value|
-        if key == :players
-          value.each do |player|
-          output.push(player[:number])
+def player_numbers(team)
+  player_numbers_only = []
+  game_hash.each do |place,teams|
+    if teams[:team_name] == team
+      teams.each do |attribute,value|
+        if attribute == :players
+          value.each do |players|
+            player_numbers_only << players[:number]
           end
         end
       end
     end
   end
-  return output
+  p player_numbers_only
 end
 
-def player_stats(input)
-  game_hash.each do |team, team_info|
-    team_info.each do |key, value|
-      if key == :players
-        value.each do |player|
-          if input == player[:player_name]
+def player_stats(player_name)
+    game_hash.each do |place,team|
+    team.each do |attribute, data|
+      if attribute == :players
+        data.each do |player|
+          if player[:player_name] == player_name
             return player
-          end
-        end
+          end 
+        end 
       end
     end
   end
